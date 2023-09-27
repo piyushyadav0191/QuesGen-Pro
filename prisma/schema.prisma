@@ -1,0 +1,130 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@index([userId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  role          UserRole?
+  accounts      Account[]
+  sessions      Session[]
+  game          Game[]
+  accuracy     AccuracyRecord[]
+  rating        Rating[]
+}
+
+enum UserRole {
+  user
+  admin
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+enum GameType {
+  mcq
+  open_ended
+}
+
+model Game {
+  id          String     @id @default(cuid())
+  userId      String
+  timeStarted DateTime
+  topic       String
+  timeEnded   DateTime?
+  gameType    GameType
+  user        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  Question    Question[]
+  rating      Rating[]
+
+  @@index([userId], name: "userId")
+}
+model TopicCount {
+  id         String     @id @default(cuid())
+  topic      String      @unique
+  count      Int
+}
+
+model Question {
+  id                String   @id @default(cuid())
+  question          String
+  answer            String
+  gameId            String
+  options           Json?
+  percentageCurrent Float?
+  questionType      GameType
+  userAnswer        String?
+  isCorrect         Boolean?
+
+  game Game @relation(fields: [gameId], references: [id], onDelete: Cascade)
+
+  @@index([gameId], name: "gameId")
+}
+
+model AccuracyRecord {
+  id        Int      @id @default(autoincrement())
+  userId      String
+  userName  String
+  accuracy  Float
+  createdAt DateTime @default(now())
+  user        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+   @@index([userId], name: "accuracyId")
+}
+
+
+model Rating {
+  id         String  @id @default(cuid())
+  userId     String
+  gameId     String
+  rating     Int     // This field stores the rating value (1 to 5 stars)
+  createdAt  DateTime @default(now())
+
+  user       User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  game       Game    @relation(fields: [gameId], references: [id], onDelete: Cascade)
+
+  @@index([userId], name: "usersid")
+  @@index([gameId], name: "gamerid")
+}
