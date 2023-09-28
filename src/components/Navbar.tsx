@@ -5,6 +5,8 @@ import UserAcountNav from "./UserAcountNav";
 import { ModeToggle } from "./ThemeToggle";
 import { prisma } from "@/lib/db";
 import { CommandPalatte } from "./CommandPalatte";
+import Image from "next/image";
+import Logo from "./Logo";
 
 const Navbar = async () => {
   const session = await getAuthSession();
@@ -17,14 +19,10 @@ const Navbar = async () => {
     }));
 
   return (
-    <div className="fixed inset-x-0 top-0  bg-white dark:bg-gray-900   h-fit border-b border-zinc-300 py-2">
+    <div className="fixed inset-x-0 top-0  bg-white dark:bg-gray-900   h-16 border-b border-zinc-300 py-2 mb-3">
       <div className=" flex items-center justify-between h-full gap-2 px-8 mx-auto max-w-7xl">
         {/* logo */}
-        <Link href={"/"} className="flex items-center gap-2">
-          <p className="rounded-lg text-blue-700 border-2 border-r-8 border-b-8 border-blue-700 px-2 py-1 font-bold transition-all hover:-translate-y-[2px] md:block dark:border-black dark:bg-white">
-            MCQ Platform
-          </p>
-        </Link>
+        <Logo />
 
         <ModeToggle className="mr-2" />
         <div className="flex items-center bg-white dark:bg-gray-900">

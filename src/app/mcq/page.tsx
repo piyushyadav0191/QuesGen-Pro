@@ -10,7 +10,7 @@ type Props = {
 };
 
 export const metadata = {
-  title: "MCQ | MCQ platform",
+  title: "QuesGen Pro",
 };
 
 const page = async ({ searchParams }: Props) => {

@@ -8,7 +8,7 @@ import { redirect } from "next/navigation";
 type Props = {};
 
 export const metadata = {
-  title: "Dashboard | MCQ Platform",
+  title: "Dashboard | QuesGen Pro",
 };
 
 const page = async (props: Props) => {

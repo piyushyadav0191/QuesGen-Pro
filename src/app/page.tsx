@@ -22,10 +22,10 @@ export default async function Home() {
         <Card className="w-[600px] bg-white dark:bg-gradient-dark">
           <CardHeader>
             <CardTitle className="dark:text-gray-200">
-              Welcome to MCQ Platform!
+              Welcome to QuesGen Pro!
             </CardTitle>
             <CardDescription className="text-gray-800 dark:text-gray-300 ">
-              Welcome to our MCQ platform, where knowledge meets assessment!
+              Welcome to our QuesgGen Pro, where knowledge meets assessment!
               Seamlessly submit your multiple-choice questions, challenge others
               with your quizzes, and receive instant, insightful results.
               Empowering learning and curiosity, our platform makes testing your

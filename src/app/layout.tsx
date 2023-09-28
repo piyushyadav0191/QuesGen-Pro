@@ -9,9 +9,9 @@ import { Toaster } from "@/components/ui/toaster";
 const inter = Poppins({ subsets: ["latin"], weight: "500" });
 
 export const metadata: Metadata = {
-  title: "MCQ Platform",
+  title: "QuesGen Pro",
   description:
-    "Welcome to our MCQ platform, where knowledge meets assessment! Seamlessly submit your multiple-choice questions, challenge others with your quizzes, and receive instant, insightful results. Empowering learning and curiosity, our platform makes testing your knowledge a rewarding journey.rated by create next app",
+    "Welcome to QuesGen Pro, where knowledge meets assessment! Seamlessly submit your multiple-choice questions, challenge others with your quizzes, and receive instant, insightful results. Empowering learning and curiosity, our platform makes testing your knowledge a rewarding journey.rated by create next app",
 };
 
 export default function RootLayout({
