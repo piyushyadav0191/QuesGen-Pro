@@ -20,6 +20,13 @@ const History = async ({ limit, userId }: Props) => {
   });
   return (
     <div className="space-y-4">
+      {games.length === 0 && (
+        <div className="flex flex-col items-center justify-center space-y-4">
+          <Clock className="text-gray-400" />
+          <p className="text-gray-400">No games played yet</p>
+        </div>
+      )}
+
       {games.map((game) => (
         <div
           className="flex items-center border-b border-gray-300 py-4"
