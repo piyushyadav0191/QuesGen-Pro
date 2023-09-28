@@ -44,3 +44,40 @@
     ); /* Dark mode gradient colors */
   }
 }
+
+::-webkit-scrollbar {
+  width: 8px; /* Adjust the width as needed */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #000; /* Change this to your desired color */
+}
+* {
+  scrollbar-width: thin; /* Adjust the width as needed */
+  scrollbar-color: #000 transparent; /* Change this to your desired color */
+}
+
+*::-webkit-scrollbar {
+  width: 8px; /* Adjust the width as needed */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #000; /* Change this to your desired color */
+}
+
+/* Change scrollbar color to white in dark mode */
+.dark ::-webkit-scrollbar-thumb {
+  background-color: white;
+}
+
+/* Change scrollbar width (optional) */
+.dark ::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Change scrollbar color to white in Firefox (optional) */
+/* Note: Firefox does not support changing scrollbar color directly, but you can change the scrollbar width */
+.dark * {
+  scrollbar-width: thin;
+  scrollbar-color: white transparent;
+}
