@@ -20,7 +20,6 @@ const page = async (props: Props) => {
       },
     },
   });
-  console.log(topUsers);
 
   return (
     <div className="absolute top-1/3 left-1/3">

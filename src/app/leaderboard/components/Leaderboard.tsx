@@ -33,8 +33,10 @@ const Leaderboard = ({ topUsers }: Props) => {
 
   return (
     <div className="w-full">
-      <h1 className="text-black text-2xl font-bold mb-4">Leaderboard</h1>
-      <h2 className="text-black text-lg font-semibold mb-2">
+      <h1 className="text-black text-2xl font-bold mb-4 dark:text-gray-200">
+        Leaderboard
+      </h1>
+      <h2 className="text-black text-lg font-semibold mb-2 dark:text-gray-300">
         Top Scorer of the Month
       </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
