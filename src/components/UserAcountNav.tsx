@@ -18,19 +18,31 @@ import {
 } from "lucide-react";
 import UserAvatar from "./UserAvatar";
 import { useRouter } from "next/navigation";
+import { motion, AnimatePresence } from "framer-motion";
 
 type Props = {
   user: Pick<User, "name" | "image" | "email">;
   userRole: { role: string | "" };
 };
 
+// animation starts
+const dropdownVariants = {
+  hidden: { opacity: 0, y: -10 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.3 } },
+};
+// animation ends
+
 const UserAcountNav = ({ user, userRole }: Props) => {
   const router = useRouter();
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger>
-        <UserAvatar user={user} />
-      </DropdownMenuTrigger>
+      <motion.div>
+        <AnimatePresence>
+          <DropdownMenuTrigger>
+            <UserAvatar user={user} />
+          </DropdownMenuTrigger>
+        </AnimatePresence>
+      </motion.div>
       <DropdownMenuContent align="end" className="bg-white dark:bg-gray-900">
         <div className="flex items-center justify-start gap-2 p-2">
           <div className="flex flex-col space-y-1 leading-none">
