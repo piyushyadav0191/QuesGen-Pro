@@ -34,7 +34,11 @@ const RecentActivities = async (props: Props) => {
           You have given a total of {gameCount} game!
         </CardDescription>
       </CardHeader>
-      <CardContent className="max-h-[480px] overflow-y-scroll">
+      <CardContent
+        className={`max-h-[480px] ${
+          gameCount === 0 ? "overflow-hidden" : "overflow-y-scroll"
+        } `}
+      >
         <History limit={10} userId={session?.user.id} />
       </CardContent>
     </Card>
