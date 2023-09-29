@@ -73,7 +73,7 @@ export function FeedbackSheet() {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant="outline">Give Feedback</Button>
+        <Button variant="feedback">Give Feedback</Button>
       </SheetTrigger>
       <SheetContent>
         <SheetHeader>
