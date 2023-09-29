@@ -45,7 +45,7 @@ export default async function Home() {
       {/* Second Page - Testimonials */}
       <div className="text-center">
         <h1 className="text-3xl text-gray-700 font-bold dark:text-gray-300 mb-10">
-          Tech Stack used{" "}
+          Modern Technology used in QuesGen Pro, have a look!
         </h1>
 
         <TechStackMark />
