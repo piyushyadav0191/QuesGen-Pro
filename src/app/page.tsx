@@ -1,4 +1,5 @@
 import SignInButton from "@/components/SignInButton";
+import Testimonials from "@/components/Testimonials/Testimonials";
 import {
   Card,
   CardContent,
@@ -18,24 +19,31 @@ export default async function Home() {
   }
   return (
     <>
-      <div className="absolute top-1/3 left-1/3 ml-6 ">
-        <Card className="w-[600px] bg-white dark:bg-gradient-dark">
-          <CardHeader>
-            <CardTitle className="dark:text-gray-200">
-              Welcome to QuesGen Pro!
-            </CardTitle>
-            <CardDescription className="text-gray-800 dark:text-gray-300 ">
-              Welcome to our QuesgGen Pro, where knowledge meets assessment!
-              Seamlessly submit your multiple-choice questions, challenge others
-              with your quizzes, and receive instant, insightful results.
-              Empowering learning and curiosity, our platform makes testing your
-              knowledge a rewarding journey.
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="mt-2">
-            <SignInButton text="Sign in with Google" />
-          </CardContent>
-        </Card>
+      <div className="min-h-screen flex flex-col justify-center items-center h-[200px] md:h-[400px]">
+        {/* First Page - Description */}
+        <div className="text-center">
+          <Card className="w-[600px]  bg-white dark:bg-gradient-dark">
+            <CardHeader>
+              <CardTitle className="dark:text-gray-200">
+                Welcome to QuesGen Pro!
+              </CardTitle>
+              <CardDescription className="text-gray-800 dark:text-gray-300">
+                Welcome to our QuesgGen Pro, where knowledge meets assessment!
+                Seamlessly submit your multiple-choice questions, challenge
+                others with your quizzes, and receive instant, insightful
+                results. Empowering learning and curiosity, our platform makes
+                testing your knowledge a rewarding journey.
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="mt-2">
+              <SignInButton text="Sign in with Google" />
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+      {/* Second Page - Testimonials */}
+      <div className="mt-36">
+        <Testimonials />
       </div>
     </>
   );
