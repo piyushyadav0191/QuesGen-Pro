@@ -1,20 +1,7 @@
-import { getJokesQuery } from "../../../graphql/Query";
-import { getClient } from "../../../graphql/client";
 import RelaxSpace from "./components/RelaxSpace";
-
-export const dynamic = "force-dynamic";
-
-interface Response {
-  jokes: {
-    id: number;
-    content: string;
-  };
-}
+import jokes from "./includes/jokes";
+import { motivationalQuotes } from "./includes/motivation";
 
 export default async function page() {
-  const data = await getClient().query<Response>({
-    query: getJokesQuery,
-  });
-
-  return <RelaxSpace data={data} />;
+  return <RelaxSpace jokes={jokes} motivation={motivationalQuotes} />;
 }
