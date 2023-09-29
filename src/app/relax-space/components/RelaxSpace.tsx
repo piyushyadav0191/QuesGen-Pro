@@ -35,7 +35,7 @@ const RelaxSpace = ({ jokes, motivation }: Props) => {
               key={motivation.id}
               className={`rounded-lg p-4 ${
                 colors[index % colors.length]
-              } text-white`}
+              }text-black dark:text-white`}
               style={{ minWidth: "300px" }}
             >
               {motivation.content}
