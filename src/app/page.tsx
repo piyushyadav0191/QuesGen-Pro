@@ -1,10 +1,10 @@
+import CardDesc from "@/components/CardDesc";
 import SignInButton from "@/components/SignInButton";
 import Testimonials from "@/components/Testimonials/Testimonials";
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -25,9 +25,9 @@ export default async function Home() {
           <Card className="w-[600px]  bg-white dark:bg-gradient-dark">
             <CardHeader>
               <CardTitle className="dark:text-gray-200">
-                Welcome to QuesGen Pro!
+                <CardDesc />
               </CardTitle>
-              <CardDescription className="text-gray-800 dark:text-gray-300">
+              <CardDescription>
                 Welcome to our QuesgGen Pro, where knowledge meets assessment!
                 Seamlessly submit your multiple-choice questions, challenge
                 others with your quizzes, and receive instant, insightful
