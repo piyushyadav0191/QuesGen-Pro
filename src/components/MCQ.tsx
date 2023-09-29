@@ -15,6 +15,7 @@ import { useToast } from "./ui/use-toast";
 import Link from "next/link";
 import { cn, formatTimeDelta } from "@/lib/utils";
 import Confetti from "react-confetti";
+import { FeedbackSheet } from "./FeedbackSheet";
 
 type Props = {
   game: Game & { Question: Pick<Question, "id" | "options" | "question">[] };
@@ -145,6 +146,7 @@ const MCQ = ({ game }: Props) => {
             View Statistics
             <BarChart className="w-4 h-4 ml-2" />
           </Link>
+          <FeedbackSheet />
         </div>
       </>
     );
@@ -192,8 +194,12 @@ const MCQ = ({ game }: Props) => {
             <Button
               key={index}
               className={cn(
-                "justify-start w-full py-8 mb-4 hover:bg-slate-800",
-                `${selectedChoice === index ? "bg-white  text-black" : ""}`
+                "justify-start w-full py-8 mb-4 dark:hover:bg-slate-800 hover:bg-gray-400",
+                `${
+                  selectedChoice === index
+                    ? "dark:bg-white bg-black text-white dark:text-black"
+                    : ""
+                }`
               )}
               variant={selectedChoice === index ? "default" : "secondary"}
               onClick={() => setSelectedChoice(index)}

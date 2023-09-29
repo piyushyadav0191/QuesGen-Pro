@@ -49,6 +49,7 @@ model User {
   game          Game[]
   accuracy     AccuracyRecord[]
   rating        Rating[]
+  feedback      Feedback[]
 }
 
 enum UserRole {
@@ -127,4 +128,15 @@ model Rating {
 
   @@index([userId], name: "usersid")
   @@index([gameId], name: "gamerid")
+}
+
+model Feedback {
+  id         String  @id @default(cuid())
+  userId     String
+  name        String?
+  feedback   String?
+  createdAt  DateTime @default(now())
+  user       User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId], name: "feedbackid")
 }

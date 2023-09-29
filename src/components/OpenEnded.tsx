@@ -15,6 +15,7 @@ import axios from "axios";
 import BlankAnswerInput from "./BlankAnswers";
 import Link from "next/link";
 import Confetti from "react-confetti";
+import { FeedbackSheet } from "./FeedbackSheet";
 
 type Props = {
   game: Game & { Question: Pick<Question, "answer" | "question">[] };
@@ -133,6 +134,7 @@ const OpenEnded = ({ game }: Props) => {
             View Statistics
             <BarChart className="w-4 h-4 ml-2" />
           </Link>
+          <FeedbackSheet />
         </div>
       </>
     );
