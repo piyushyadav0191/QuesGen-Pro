@@ -12,7 +12,7 @@ type Props = {
 
 const RecentUsers = ({ users }: Props) => {
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 overflow-scroll h-[350px]">
       {users.map((user) => (
         <Recent user={user} />
       ))}
