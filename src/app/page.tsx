@@ -1,5 +1,6 @@
 import CardDesc from "@/components/CardDesc";
 import SignInButton from "@/components/SignInButton";
+import TechStackMark from "@/components/TechStackMark";
 import Testimonials from "@/components/Testimonials/Testimonials";
 import {
   Card,
@@ -42,6 +43,17 @@ export default async function Home() {
         </div>
       </div>
       {/* Second Page - Testimonials */}
+      <div className="text-center">
+        <h1 className="text-3xl text-gray-700 font-bold dark:text-gray-300 mb-10">
+          Tech Stack used{" "}
+        </h1>
+
+        <TechStackMark />
+        <p>
+          Click on <span className="text-red-600 text-xl font-semibold">?</span>{" "}
+          to know
+        </p>
+      </div>
       <div className="mt-36">
         <Testimonials />
       </div>
