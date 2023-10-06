@@ -147,7 +147,7 @@ model CareerAdvice {
   id         String  @id @default(cuid())
   userId     String
   name        String?
-  careerAdvice   String?
+  careerAdvice   Json?
   createdAt  DateTime @default(now())
   user       User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 

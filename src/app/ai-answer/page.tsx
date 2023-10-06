@@ -1,7 +1,6 @@
 import AiAnswer from "./components/AiAnswer";
 import { getAuthSession } from "@/lib/nextauth";
 import { redirect } from "next/navigation";
-import { prisma } from "@/lib/db";
 
 type Props = {};
 
@@ -13,7 +12,7 @@ const page = async (props: Props) => {
   }
 
   return (
-    <div className="mt-10 mx-4">
+    <div className="mt-10 mx-4 max-w-3xl">
       <AiAnswer />
     </div>
   );
