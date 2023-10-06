@@ -95,7 +95,7 @@ const TechStackMark = (props: Props) => {
         <DialogContent>
           <DialogHeader>
             <DialogTitle>Modern Tech Stack in QuesGen Pro</DialogTitle>
-            <DialogDescription>
+            <DialogDescription className="bg-white">
               <div>
                 <div className="flex flex-wrap">
                   {cardData.map((card, index) => (
@@ -107,7 +107,9 @@ const TechStackMark = (props: Props) => {
                           className="w-16 h-16 mx-auto"
                         />
                       </div>
-                      <div className="text-center">{card.title}</div>
+                      <div className="text-center dark:text-black">
+                        {card.title}
+                      </div>
                     </div>
                   ))}
                 </div>
