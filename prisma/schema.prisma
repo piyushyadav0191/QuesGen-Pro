@@ -50,6 +50,8 @@ model User {
   accuracy     AccuracyRecord[]
   rating        Rating[]
   feedback      Feedback[]
+    hasGeneratedAdvice Boolean @default(false)
+  careerAdvice  CareerAdvice[]
 }
 
 enum UserRole {
@@ -140,3 +142,14 @@ model Feedback {
 
   @@index([userId], name: "feedbackid")
 }
+
+model CareerAdvice {
+  id         String  @id @default(cuid())
+  userId     String
+  name        String?
+  careerAdvice   String?
+  createdAt  DateTime @default(now())
+  user       User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId], name: "careeradviceid")
+  }

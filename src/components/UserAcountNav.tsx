@@ -14,6 +14,8 @@ import {
   CircuitBoardIcon,
   LayoutDashboardIcon,
   LogOut,
+  Smile,
+  StickyNote,
   UserCircle,
 } from "lucide-react";
 import UserAvatar from "./UserAvatar";
@@ -101,7 +103,15 @@ const UserAcountNav = ({ user, userRole }: Props) => {
             {" "}
             Relax Space
           </Link>
-          <CircuitBoardIcon className="w-4 h-4 ml-2" />
+          <Smile className="w-4 h-4 ml-2" />
+        </DropdownMenuItem>
+        <DropdownMenuSeparator className="text-black" />
+        <DropdownMenuItem className="">
+          <Link className="dark:text-gray-200" href={"/career-advice"}>
+            {" "}
+            Career Advice
+          </Link>
+          <StickyNote className="w-4 h-4 ml-2" />
         </DropdownMenuItem>
         <DropdownMenuSeparator className="text-black" />
 
