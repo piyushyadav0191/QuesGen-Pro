@@ -21,25 +21,35 @@ const Navbar = async () => {
   return (
     <div className="fixed inset-x-0 top-0  bg-white dark:bg-gray-900   h-16 border-b border-zinc-300 py-2 mb-3">
       <div className=" flex items-center justify-between h-full gap-2 px-8 mx-auto max-w-7xl">
-        {/* logo */}
-        <Logo />
+        <div className="flex items-center">
+          {" "}
+          {/* Left side with Logo */}
+          <Logo />
+        </div>
 
-        <ModeToggle className="mr-2" />
-        <div className="flex items-center bg-white dark:bg-gray-900">
-          {session?.user ? (
-            <>
-              <span className="mr-4 p-2">
-                <CommandPalatte />
-              </span>
-              <UserAcountNav
-                user={session.user}
-                // @ts-ignore
-                userRole={userRole}
-              />
-            </>
-          ) : (
-            <SignInButton text="Sign In" />
-          )}
+        <div className="flex items-center space-x-4">
+          {" "}
+          {/* Right side with Sign In, Blog, and ModeToggle */}
+          <Link href={"/blog"} className="underline">
+            Blog
+          </Link>
+          <div className="flex items-center bg-white dark:bg-gray-900">
+            {session?.user ? (
+              <>
+                <span className="mr-4 p-2">
+                  <CommandPalatte />
+                </span>
+                <UserAcountNav
+                  user={session.user}
+                  // @ts-ignore
+                  userRole={userRole}
+                />
+              </>
+            ) : (
+              <SignInButton text="Sign In" />
+            )}
+          </div>
+          <ModeToggle className="mr-2" />
         </div>
       </div>
     </div>
