@@ -52,12 +52,12 @@ const Sidebar = () => {
             animate={{ x: 0 }}
             exit={{ x: -300 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-y-0 z-10 flex w-80"
+            className="fixed inset-y-0 z-10 flex w-80 dark:bg-gray-900"
             id="sidebar"
           >
             {/* Curvy shape */}
             <svg
-              className="absolute inset-0 w-full h-full text-white"
+              className="absolute inset-0 w-full h-full text-white "
               style={{ filter: "drop-shadow(10px 0 10px #00000030)" }}
               preserveAspectRatio="none"
               viewBox="0 0 309 800"
@@ -67,7 +67,7 @@ const Sidebar = () => {
               <path d="M268.487 0H0V800H247.32C207.957 725 207.975 492.294 268.487 367.647C329 243 314.906 53.4314 268.487 0Z" />
             </svg>
             {/* Sidebar content */}
-            <div className="z-10 flex flex-col flex-1">
+            <div className="z-10 flex flex-col flex-1 dark:bg-gray-900">
               <div className="flex items-center justify-between flex-shrink-0 w-64 p-4">
                 {/* Logo */}
                 <Link href={"/"} className="px-4 text-2xl font-bold italic">
@@ -145,7 +145,7 @@ const Sidebar = () => {
       <main className="flex flex-col items-center justify-center flex-1">
         <button
           onClick={toggleSidebar}
-          className="fixed p-2 text-black rounded-lg top-5 left-5"
+          className="fixed  text-black dark:text-white rounded-lg top-5 left-5"
         >
           <Menu className="w-6 h-6" />
           <span className="sr-only">Open menu</span>
