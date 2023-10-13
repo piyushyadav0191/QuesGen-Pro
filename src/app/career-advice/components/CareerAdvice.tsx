@@ -84,51 +84,53 @@ const CareerAdvice = (props: Props) => {
 
   return (
     <>
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-          <FormField
-            control={form.control}
-            name="topic"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Topic</FormLabel>
-                <FormControl>
-                  <Input placeholder="topic..." {...field} />
-                </FormControl>
-                <FormDescription>
-                  This is your public display name.
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="experienced"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Experience</FormLabel>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
+      <div className="min-h-screen flex items-center justify-center">
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+            <FormField
+              control={form.control}
+              name="topic"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Topic</FormLabel>
                   <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select your experience" />
-                    </SelectTrigger>
+                    <Input placeholder="topic..." {...field} />
                   </FormControl>
-                  <SelectContent>
-                    <SelectItem value="experienced">experienced</SelectItem>
-                    <SelectItem value="fresher">fresher</SelectItem>
-                  </SelectContent>
-                </Select>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <Button type="submit">Submit</Button>
-        </form>
-      </Form>
+                  <FormDescription>
+                    This is your public display name.
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="experienced"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Experience</FormLabel>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select your experience" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent className="bg-white dark:bg-gray-900">
+                      <SelectItem value="experienced">experienced</SelectItem>
+                      <SelectItem value="fresher">fresher</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <Button type="submit">Submit</Button>
+          </form>
+        </Form>
+      </div>
     </>
   );
 };
