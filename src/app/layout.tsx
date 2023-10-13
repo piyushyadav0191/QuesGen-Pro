@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import Navbar from "@/components/Navbar";
 import Providers from "@/components/Providers";
 import { Toaster } from "@/components/ui/toaster";
+import Sidebar from "@/components/sidebar/sidebar";
 
 const inter = Poppins({ subsets: ["latin"], weight: "500" });
 
