@@ -7,7 +7,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Card, CardContent } from "./ui/card";
 
 type Props = {};
 
@@ -51,6 +50,10 @@ const cardData = [
   {
     iconSrc: "/icons/auth.svg",
     title: "Next Auth",
+  },
+  {
+    iconSrc: "/icons/sanity.svg",
+    title: "Sanity",
   },
   {
     iconSrc: "/icons/prisma.svg",

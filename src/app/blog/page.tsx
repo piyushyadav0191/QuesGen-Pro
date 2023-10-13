@@ -10,7 +10,7 @@ async function getData() {
   return data;
 }
 
-export const revalidate = 60; // revalidate this page every 60 seconds
+export const revalidate = 60; // 60 sec
 
 export default async function Page() {
   const data = (await getData()) as Post[];
