@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import Navbar from "@/components/Navbar";
 import Providers from "@/components/Providers";
 import { Toaster } from "@/components/ui/toaster";
-import Sidebar from "@/components/sidebar/sidebar";
+import FlareCursor from "@/components/Flarecursor";
 
 const inter = Poppins({ subsets: ["latin"], weight: "500" });
 
@@ -30,6 +30,7 @@ export default function RootLayout({
       >
         <Providers>
           <Navbar />
+          <FlareCursor />
           {children}
           <Toaster />
         </Providers>

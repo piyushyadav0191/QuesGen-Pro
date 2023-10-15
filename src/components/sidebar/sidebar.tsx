@@ -70,7 +70,7 @@ const Sidebar = () => {
             <div className="z-10 flex flex-col flex-1 dark:bg-gray-900">
               <div className="flex items-center justify-between flex-shrink-0 w-64 p-4">
                 {/* Logo */}
-                <Link href={"/"} className="px-4 text-2xl font-bold italic">
+                <Link href={"/"} className="px-4 text-2xl font-bold ">
                   QuesGen Pro
                 </Link>
                 {/* Close btn */}
