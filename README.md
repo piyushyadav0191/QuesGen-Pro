@@ -14,6 +14,7 @@ QuesGen Pro is a is a platform designed to facilitate the taking of tests, wheth
 - Admin Dashbooard Analytics
 - Feedback system
 - Testimonials
+- Blog
 
 ## Technology Stack
 
@@ -28,6 +29,7 @@ The project is built using the following technologies:
 - **OpenAI**: An artificial intelligence research laboratory.
 - **Prisma**: A next-generation ORM (Object Relational Mapping) tool for Node.js and TypeScript applications.
 - **PostgreSQL**: An open-source relational database management system.
+- **Sanity**: A CMS
 
 ## Getting Started and Usage
 
