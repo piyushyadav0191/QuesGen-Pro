@@ -6,7 +6,6 @@ const openai = new OpenAI({
 
 export const runtime = 'edge';
 
-
 interface OutputFormat {
   [key: string]: string | string[] | OutputFormat;
 }
@@ -18,9 +17,7 @@ export async function strict_output(
   default_category: string = "",
   output_value_only: boolean = false,
   model: string = "gpt-3.5-turbo",
-  temperature: number = 0,
   num_tries: number = 3,
-  verbose: boolean = false
 ) {
 
   const list_input: boolean = Array.isArray(user_prompt);
@@ -54,7 +51,6 @@ export async function strict_output(
 
     // Use OpenAI to get a response
     const response = await openai.chat.completions.create({
-      temperature: temperature,
       model: model,
       messages: [
         {
@@ -68,15 +64,6 @@ export async function strict_output(
     let res: string =  response.choices[0].message?.content?.replace(/'/g, '"') ?? "";
 
     res = res.replace(/(\w)"(\w)/g, "$1'$2");
-
-    if (verbose) {
-      console.log(
-        "System prompt:",
-        system_prompt + output_format_prompt + error_msg
-      );
-      console.log("\nUser prompt:", user_prompt);
-      console.log("\nGPT response:", res);
-    }
 
     try {
       let output: any = JSON.parse(res);

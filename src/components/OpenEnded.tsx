@@ -6,7 +6,7 @@ import { differenceInSeconds } from "date-fns";
 import { BarChart, ChevronRight, Loader2, Timer } from "lucide-react";
 import { Card, CardDescription, CardHeader, CardTitle } from "./ui/card";
 import { Button, buttonVariants } from "./ui/button";
-import { useToast } from "./ui/use-toast";
+import { toast } from "sonner";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { checkAnswerSchema } from "@/schemas/form/mcq";
@@ -39,7 +39,6 @@ const OpenEnded = ({ game }: Props) => {
   const [blankAnswer, setBlankAnswer] = useState<string>("");
   const [hasEnded, setHasEnded] = useState<boolean>(false);
   const [now, setNow] = useState<Date>(new Date());
-  const { toast } = useToast();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -80,10 +79,7 @@ const OpenEnded = ({ game }: Props) => {
     console.log(blankAnswer);
     checkAnswer(undefined, {
       onSuccess: ({ percentageSimilar }) => {
-        toast({
-          title: `Your answer is ${percentageSimilar}% similar to the correct answer`,
-          description: "You can try again if you want",
-        });
+        toast.info(`You got ${percentageSimilar}% of the answer correct`);
         if (questionIndex === game.Question.length - 1) {
           setHasEnded(true);
           return;
@@ -91,10 +87,7 @@ const OpenEnded = ({ game }: Props) => {
         setQuestionIndex((prev) => prev + 1);
       },
       onError: () => {
-        toast({
-          title: "Error",
-          description: "Something went wrong",
-        });
+        toast.error("An error occurred");
       },
     });
   }, [

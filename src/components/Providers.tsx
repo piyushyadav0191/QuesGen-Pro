@@ -5,7 +5,7 @@ import { ThemeProvider as NextThemesProvider } from "next-themes";
 import { type ThemeProviderProps } from "next-themes/dist/types";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
-import { useToast } from "./ui/use-toast";
+import { toast } from "sonner";
 import { jokes } from "@/lib/jokes";
 
 const getRandomJoke = () => {
@@ -16,7 +16,7 @@ const getRandomJoke = () => {
 const queryClient = new QueryClient();
 
 const Providers = ({ children, ...props }: ThemeProviderProps) => {
-  const { toast } = useToast();
+
   const [showToast, setShowToast] = useState(false);
 
   useEffect(() => {
@@ -31,11 +31,7 @@ const Providers = ({ children, ...props }: ThemeProviderProps) => {
 
   useEffect(() => {
     if (showToast) {
-      toast({
-        title: "Joke of the day",
-        description: getRandomJoke(),
-        duration: 10000,
-      });
+      toast.info(`Did you know? ${getRandomJoke()}`);
     }
   }, [showToast]);
 

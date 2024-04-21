@@ -11,7 +11,7 @@ import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { z } from "zod";
 import { checkAnswerSchema } from "@/schemas/form/mcq";
-import { useToast } from "./ui/use-toast";
+import {toast} from "sonner"
 import Link from "next/link";
 import { cn, formatTimeDelta } from "@/lib/utils";
 import Confetti from "react-confetti";
@@ -28,8 +28,6 @@ const MCQ = ({ game }: Props) => {
   const [hasEnded, setHasEnded] = useState<boolean>(false);
   const [wrongAnswers, setWrongAnswers] = useState<number>(0);
   const [now, setNow] = useState<Date>(new Date());
-
-  const { toast } = useToast();
 
   const [dimensions, setDimensions] = useState({
     width: 0,
@@ -81,18 +79,10 @@ const MCQ = ({ game }: Props) => {
     checkAnswer(undefined, {
       onSuccess: ({ isCorrect }) => {
         if (isCorrect) {
-          toast({
-            title: "Correct Answer",
-            description: "You got the correct answer",
-            variant: "sucess",
-          });
+          toast.success("Correct Answer");
           setCorrectAnswers((prev) => prev + 1);
         } else {
-          toast({
-            title: "Wrong Answer",
-            description: "You got the wrong answer",
-            variant: "destructive",
-          });
+          toast.error("Wrong Answer");
           setWrongAnswers((prev) => prev + 1);
         }
         if (questionIndex === game.Question.length - 1) {
@@ -102,10 +92,7 @@ const MCQ = ({ game }: Props) => {
         setQuestionIndex((prev) => prev + 1);
       },
       onError: () => {
-        toast({
-          title: "Error",
-          description: "Something went wrong",
-        });
+        toast.error("Error checking answer");
       },
     });
   }, [checkAnswer, toast, isChecking, questionIndex, game.Question.length]);

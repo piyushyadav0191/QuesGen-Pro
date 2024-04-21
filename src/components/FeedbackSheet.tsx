@@ -24,10 +24,9 @@ import {
 } from "./ui/form";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
-import { useToast } from "./ui/use-toast";
+import { toast } from "sonner";
 
 export function FeedbackSheet() {
-  const { toast } = useToast();
 
   type Input = z.infer<typeof feedbackSchema>;
 
@@ -56,14 +55,10 @@ export function FeedbackSheet() {
       },
       {
         onSuccess: () => {
-          toast({
-            title: "Feedback Submitted",
-          });
+          toast.success("Thank you for your feedback");
         },
         onError: () => {
-          toast({
-            title: "Something went wrong",
-          });
+          toast.error("Error sending feedback");
         },
       }
     );
