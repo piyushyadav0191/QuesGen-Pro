@@ -29,7 +29,8 @@ import { Separator } from "./ui/separator";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import LoadingQuestions from "./LoadingQuestions";
+
+import { toast } from "sonner";
 
 type Input = z.infer<typeof mcqCreationSchema>;
 
@@ -38,9 +39,8 @@ type Props = {
 };
 
 const McqCreation = ({ topicParam }: Props) => {
+
   const router = useRouter();
-  const [showLoader, setShowLoader] = useState(false);
-  const [finished, setFinished] = useState(false);
   const { mutate: getQuestions, isLoading } = useMutation({
     mutationFn: async ({ amount, topic, type }: Input) => {
       const response = await axios.post("/api/game", {
@@ -53,7 +53,6 @@ const McqCreation = ({ topicParam }: Props) => {
   });
 
   const form = useForm<Input>({
-    // @ts-ignore
     resolver: zodResolver(mcqCreationSchema),
     defaultValues: {
       amount: 3,
@@ -63,7 +62,7 @@ const McqCreation = ({ topicParam }: Props) => {
   });
 
   const onSubmit = (input: Input) => {
-    setShowLoader(true);
+   const loading =  toast.loading("Please wait...");
     getQuestions(
       {
         amount: input.amount,
@@ -72,8 +71,8 @@ const McqCreation = ({ topicParam }: Props) => {
       },
       {
         onSuccess: ({ gameId }) => {
-          setFinished(true);
-          setTimeout(() => {
+          toast.dismiss(loading);
+          toast.success("Game created successfully");
             if (form.getValues("type") === "open_ended") {
               router.push(`/play/open-ended/${gameId}`);
             } else if (form.getValues("type") === "mcq") {
@@ -81,10 +80,10 @@ const McqCreation = ({ topicParam }: Props) => {
             } else {
               router.push("/");
             }
-          }, 1000);
         },
         onError: () => {
-          setShowLoader(false);
+          toast.dismiss(loading)
+          toast.error("Error creating game");
         },
       }
     );
@@ -92,9 +91,9 @@ const McqCreation = ({ topicParam }: Props) => {
 
   form.watch();
 
-  if (showLoader && isLoading) {
-    return <LoadingQuestions finished={finished} />;
-  }
+  // if (showLoader && isLoading) {
+  //   return <LoadingQuestions finished={finished} />;
+  // }
 
   return (
     <div className="absolute top-[170px] left-[650px] bg-white">

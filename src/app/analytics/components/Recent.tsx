@@ -1,25 +1,18 @@
 "use client";
 
-import { useToast } from "@/components/ui/use-toast";
+import { toast } from "sonner";
 import { useMutation } from "@tanstack/react-query";
 import { Trash2 } from "lucide-react";
 
 const Recent = ({ user }: any) => {
-  const { toast } = useToast();
   const { mutate: deleteUser } = useMutation(
     (id: string) => fetch(`/api/users?userId=${id}`, { method: "DELETE" }),
     {
       onSuccess: () => {
-        toast({
-          title: "User deleted successfully",
-          description: "user has been deleted from the database",
-        });
+        toast.success("User deleted successfully");
       },
       onError: () => {
-        toast({
-          title: "An error occurred",
-          description: "Unable to delete user",
-        });
+        toast.error("Error deleting user");
       },
     }
   );

@@ -26,7 +26,7 @@ import {
 } from "@/components/ui/select";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
-import { useToast } from "@/components/ui/use-toast";
+import { toast } from "sonner";
 import { Router } from "lucide-react";
 import { useRouter } from "next/navigation";
 
@@ -35,7 +35,6 @@ type Input = z.infer<typeof careerAdviceSchema>;
 
 const CareerAdvice = (props: Props) => {
   const router = useRouter();
-  const { toast } = useToast();
 
   const form = useForm<z.infer<typeof careerAdviceSchema>>({
     resolver: zodResolver(careerAdviceSchema),
@@ -69,9 +68,7 @@ const CareerAdvice = (props: Props) => {
           if (error?.response?.data?.error) {
             router.push("/pricing");
           }
-          toast({
-            title: "Something went wrong",
-          });
+          toast.error("Error getting advice");
         },
       }
     );

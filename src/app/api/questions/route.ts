@@ -3,7 +3,9 @@ import { mcqCreationSchema } from "@/schemas/form/mcq";
 import { NextResponse } from "next/server";
 import { ZodError } from "zod";
 
-export const POST = async (req: Request, res: Response) => {
+export const runtime = 'edge';
+
+export const POST = async (req: Request) => {
   try {
     const body = await req.json();
     const { amount, topic, type } = mcqCreationSchema.parse(body);

@@ -1,11 +1,11 @@
-import { Configuration, OpenAIApi } from "openai";
-
-const configuration = new Configuration({
+import OpenAI from 'openai';
+ 
+const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
-export const runtime = "edge";
 
-const openai = new OpenAIApi(configuration);
+export const runtime = 'edge';
+
 
 interface OutputFormat {
   [key: string]: string | string[] | OutputFormat;
@@ -18,15 +18,14 @@ export async function strict_output(
   default_category: string = "",
   output_value_only: boolean = false,
   model: string = "gpt-3.5-turbo",
-  temperature: number = 1,
+  temperature: number = 0,
   num_tries: number = 3,
   verbose: boolean = false
 ) {
-  // if the user input is in a list, we also process the output as a list of json
+
   const list_input: boolean = Array.isArray(user_prompt);
-  // if the output format contains dynamic elements of < or >, then add to the prompt to handle dynamic elements
+  
   const dynamic_elements: boolean = /<.*?>/.test(JSON.stringify(output_format));
-  // if the output format contains list elements of [ or ], then we add to the prompt to handle lists
   const list_output: boolean = /\[.*?\]/.test(JSON.stringify(output_format));
 
   // start off with no error message
@@ -54,7 +53,7 @@ export async function strict_output(
     }
 
     // Use OpenAI to get a response
-    const response = await openai.createChatCompletion({
+    const response = await openai.chat.completions.create({
       temperature: temperature,
       model: model,
       messages: [
@@ -66,10 +65,8 @@ export async function strict_output(
       ],
     });
 
-    let res: string =
-      response.data.choices[0].message?.content?.replace(/'/g, '"') ?? "";
+    let res: string =  response.choices[0].message?.content?.replace(/'/g, '"') ?? "";
 
-    // ensure that we don't replace away apostrophes in text
     res = res.replace(/(\w)"(\w)/g, "$1'$2");
 
     if (verbose) {
@@ -81,7 +78,6 @@ export async function strict_output(
       console.log("\nGPT response:", res);
     }
 
-    // try-catch block to ensure output format is adhered to
     try {
       let output: any = JSON.parse(res);
 
@@ -93,10 +89,9 @@ export async function strict_output(
         output = [output];
       }
 
-      // check for each element in the output_list, the format is correctly adhered to
       for (let index = 0; index < output.length; index++) {
         for (const key in output_format) {
-          // unable to ensure accuracy of dynamic output header, so skip it
+       
           if (/<.*?>/.test(key)) {
             continue;
           }
