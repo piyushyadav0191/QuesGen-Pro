@@ -12,8 +12,7 @@ export const mcqCreationSchema = z.object({
 export const careerAdviceSchema = z.object({
   topic: z
     .string()
-    .min(4, { message: "Topic must be at least 4 characters long" })
-    .max(50),
+    .min(4, { message: "Topic must be at least 4 characters long" }),
   experienced: z.enum(["fresher", "experienced"]),
 });
 
