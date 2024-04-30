@@ -10,12 +10,11 @@ export const POST = async (req: Request, res: Response) => {
     const body = await req.json();
     const { feedback, name } = feedbackSchema.parse(body);
     await prisma.feedback.create({
-      // @ts-ignore
       data: {
         createdAt: new Date(),
         feedback,
         name,
-        userId: session?.user?.id,
+        userId: session?.user?.id as string,
       },
     });
 

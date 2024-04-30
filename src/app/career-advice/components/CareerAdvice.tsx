@@ -26,6 +26,7 @@ import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 
 type Input = z.infer<typeof careerAdviceSchema>;
@@ -78,7 +79,16 @@ const CareerAdvice = () => {
 
       <div className="min-h-screen flex items-center justify-center">
         <Form {...form}>
+       
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+          <CardHeader>
+          <CardTitle className="text-2xl font-bold text-black dark:text-gray-300 ">
+            Career Advice
+          </CardTitle>
+          <CardDescription className="text-black dark:text-gray-200">
+            Get career advice based on your experience and topic.
+          </CardDescription>
+        </CardHeader>
             <FormField
               control={form.control}
               name="topic"
@@ -89,7 +99,7 @@ const CareerAdvice = () => {
                     <Input placeholder="topic..." {...field} />
                   </FormControl>
                   <FormDescription>
-                    This is your public display name.
+                    This is your public display topic.
                   </FormDescription>
                   <FormMessage />
                 </FormItem>

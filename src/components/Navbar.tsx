@@ -21,7 +21,7 @@ const Navbar = async () => {
   return (
     <>
         {!!session?.user && <Sidebar />}
-      <div className="sticky inset-x-0 top-0  h-16 border-b border-zinc-300 py-2 mb-3">
+      <div className="fixed inset-x-0 top-0  h-16 border-b border-zinc-300 py-2 mb-3">
         <div className=" flex items-center justify-between h-full gap-2 px-8 mx-auto max-w-7xl">
           <div className="flex justify-center">
             <Logo />
@@ -36,7 +36,7 @@ const Navbar = async () => {
             <div className="flex items-center ">
               {session?.user ? (
                 <>
-                  <span className="mr-4 p-2">
+                  <span className="mr-4 p-2 hidden md:flex lg:flex">
                     <CommandPalatte />
                   </span>
                   <UserAcountNav

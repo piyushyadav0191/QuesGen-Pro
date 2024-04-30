@@ -11,12 +11,11 @@ export const POST = async (req: Request, res: Response) => {
     const body = await req.json();
     const { amount, topic, type } = mcqCreationSchema.parse(body);
     const game = await prisma.game.create({
-      // @ts-ignore
       data: {
         gameType: type,
         timeStarted: new Date(),
-        userId: session?.user.id,
-        topic: topic, // acording to es6
+        userId: session?.user.id as string,
+        topic,
         timeEnded: new Date(),
       },
     });

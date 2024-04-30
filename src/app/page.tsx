@@ -25,7 +25,7 @@ export default async function Home() {
           <div className="flex flex-wrap items-center sm:-mx-3">
             <div className="w-full md:w-1/2 md:px-3">
               <div className="w-full pb-6 space-y-6 sm:max-w-md lg:max-w-lg md:space-y-4 lg:space-y-8 xl:space-y-9 sm:pr-5 lg:pr-0 md:pb-0">
-                <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl md:text-4xl lg:text-5xl xl:text-6xl">
+                <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white  sm:text-5xl md:text-4xl lg:text-5xl xl:text-6xl">
                   <span className="block xl:inline">QuesGen Pro </span>
                   <span className="block text-indigo-600 xl:inline">
                     take Assessment like a magic.

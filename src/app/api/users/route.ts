@@ -3,12 +3,11 @@ import { NextResponse } from "next/server";
 
 export const DELETE = async (req: Request, res: Response) => {
   try {
-    // delete suer by id from params
     const url = new URL(req.url);
     const id = url.searchParams.get("userId");
     await prisma.user.delete({
       where: {
-        id,
+        id: id as string,
       },
     });
     return NextResponse.json(

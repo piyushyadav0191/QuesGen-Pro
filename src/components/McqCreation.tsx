@@ -41,7 +41,7 @@ type Props = {
 const McqCreation = ({ topicParam }: Props) => {
 
   const router = useRouter();
-  const { mutate: getQuestions, isLoading } = useMutation({
+  const { mutate: getQuestions } = useMutation({
     mutationFn: async ({ amount, topic, type }: Input) => {
       const response = await axios.post("/api/game", {
         amount,
@@ -96,7 +96,7 @@ const McqCreation = ({ topicParam }: Props) => {
       <Card>
         <CardHeader>
           <CardTitle className="text-2xl font-bold text-black dark:text-gray-300 ">
-            MCQ/OE creation
+           See the Magic like ABRACA-DABRA
           </CardTitle>
           <CardDescription className="text-black dark:text-gray-200">
             Choose a Topic

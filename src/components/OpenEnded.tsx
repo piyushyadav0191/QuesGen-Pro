@@ -37,28 +37,15 @@ const OpenEnded = ({ game }: Props) => {
       height,
     });
   }, []);
-
-  useEffect(() => {
-    // If game or game.Question is not defined, set questionsReady to false
-    if (!game || !game.Question) {
-      setQuestionsReady(false);
-    } else {
-      setQuestionsReady(true);
-    }
-  }, [game]);
-  
-
   
   useEffect(() => {
-    const interval = setInterval(() => {
-      if (!hasEnded && questionsReady) { // Only update the time if the questions are ready
+    if (!hasEnded) {
+      const interval = setInterval(() => {
         setNow(new Date());
-      }
-    }, 1000);
-    return () => {
-      clearInterval(interval);
-    };
-  }, [hasEnded, questionsReady]); 
+      }, 1000);
+      return () => clearInterval(interval);
+    }
+  }, [hasEnded]);
 
   const currentQuestions = useMemo(() => {
     return game.Question[questionIndex];
@@ -84,10 +71,10 @@ const OpenEnded = ({ game }: Props) => {
   });
 
   const handleNext = useCallback(() => {
-    if (isChecking) return;
+    // if (isChecking) return;
     checkAnswer(undefined, {
       onSuccess: ({ percentageSimilar }) => {
-        toast.info(`You got ${percentageSimilar}% of the answer correct`);
+        toast.info(`You got ${percentageSimilar}% similar to the correct answer`);
         if (questionIndex === game.Question.length - 1) {
           setHasEnded(true);
           return;
@@ -104,7 +91,7 @@ const OpenEnded = ({ game }: Props) => {
     isChecking,
     questionIndex,
     game.Question.length,
-    blankAnswer,
+    // blankAnswer,
   ]);
 
   useEffect(() => {

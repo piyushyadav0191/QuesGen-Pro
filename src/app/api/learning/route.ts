@@ -1,11 +1,8 @@
-import { strict_output } from "@/lib/chatgpt";
 import { prisma } from "@/lib/db";
 import { getAuthSession } from "@/lib/nextauth";
 import { careerAdviceSchema } from "@/schemas/form/mcq";
 import { NextResponse } from "next/server";
 import OpenAI from 'openai';
-import { OpenAIStream, StreamingTextResponse } from 'ai';
-import { ChatCompletionMessageParam } from "openai/resources/index.mjs";
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
