@@ -18,7 +18,7 @@ const page = async (props: Props) => {
   }
 
   return (
-    <main className="p-8 mx-auto max-w-7xl bg-white dark:bg-gray-900 mt-5 ">
+    <main className="p-8 mx-auto max-w-7xl  mt-5 ">
       <div className="flex items-center">
         <h1 className="mr-2 text-3xl text-gray-700 border-b-2 border-separate border-black font-bold dark:text-gray-300 tracking-tight">
           Dashboard

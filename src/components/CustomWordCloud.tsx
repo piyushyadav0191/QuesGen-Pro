@@ -1,38 +1,42 @@
 "use client";
 
-import { TagCloud } from "react-tagcloud";
 import { useRouter } from "next/navigation";
 import randomColor from "randomcolor";
+import D3WordCloud from "react-d3-cloud";
+import { useTheme } from "next-themes";
+import { useCallback } from "react";
 
 type Props = {
-  formattedTopic: { value: string; count: number }[];
+  formattedTopic: { text: string; value: number }[];
 };
+
 
 const CustomWordCloud = ({ formattedTopic }: Props) => {
   const router = useRouter();
 
+  const theme = useTheme();
+  const rotate = useCallback((word: any) => word.value % 360, []);
+  const fontSizeMapper = (word: { value: number }) =>
+    Math.log2(word.value) * 5 + 16;
+
+
   return (
-    <div>
-      <TagCloud
-        // @ts-ignore
+    <>
+        <D3WordCloud
+        data={formattedTopic}
         height={550}
-        className="cursor-pointer"
-        // @ts-ignore
-        style={{
-          fontFamily: "sans-serif",
-          fontSize: () => Math.round(Math.random() * 50) + 16,
-          color: () =>
-            randomColor({
-              hue: "blue",
-            }),
-          padding: 5,
+        font="Times"
+        fontSize={fontSizeMapper}
+        rotate={rotate}
+        padding={10}
+        random={Math.random}
+        spiral={"archimedean"}
+        fill={theme.theme === "dark" ? "white" : "black"}
+        onWordClick={(e, d) => {
+          router.push("/mcq?topic=" + d.text);
         }}
-        minSize={12}
-        maxSize={35}
-        tags={formattedTopic}
-        onClick={(tag: any) => router.push(`/mcq?topic=${tag.value}`)}
       />
-    </div>
+    </>
   );
 };
 

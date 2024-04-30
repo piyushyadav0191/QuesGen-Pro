@@ -22,10 +22,13 @@ type Props = {
 };
 
 const OpenEnded = ({ game }: Props) => {
-  const [dimensions, setDimensions] = useState({
-    width: 0,
-    height: 0,
-  });
+  const [dimensions, setDimensions] = useState({width: 0,height: 0});
+  const [questionIndex, setQuestionIndex] = useState<number>(0);
+  const [blankAnswer, setBlankAnswer] = useState<string>("");
+  const [hasEnded, setHasEnded] = useState<boolean>(false);
+  const [now, setNow] = useState<Date>(new Date());
+  const [questionsReady, setQuestionsReady] = useState<boolean>(false);
+
 
   useEffect(() => {
     const { innerWidth: width, innerHeight: height } = window;
@@ -35,21 +38,27 @@ const OpenEnded = ({ game }: Props) => {
     });
   }, []);
 
-  const [questionIndex, setQuestionIndex] = useState<number>(0);
-  const [blankAnswer, setBlankAnswer] = useState<string>("");
-  const [hasEnded, setHasEnded] = useState<boolean>(false);
-  const [now, setNow] = useState<Date>(new Date());
+  useEffect(() => {
+    // If game or game.Question is not defined, set questionsReady to false
+    if (!game || !game.Question) {
+      setQuestionsReady(false);
+    } else {
+      setQuestionsReady(true);
+    }
+  }, [game]);
+  
 
+  
   useEffect(() => {
     const interval = setInterval(() => {
-      if (!hasEnded) {
+      if (!hasEnded && questionsReady) { // Only update the time if the questions are ready
         setNow(new Date());
       }
     }, 1000);
     return () => {
       clearInterval(interval);
     };
-  }, [hasEnded]);
+  }, [hasEnded, questionsReady]); 
 
   const currentQuestions = useMemo(() => {
     return game.Question[questionIndex];
@@ -76,7 +85,6 @@ const OpenEnded = ({ game }: Props) => {
 
   const handleNext = useCallback(() => {
     if (isChecking) return;
-    console.log(blankAnswer);
     checkAnswer(undefined, {
       onSuccess: ({ percentageSimilar }) => {
         toast.info(`You got ${percentageSimilar}% of the answer correct`);

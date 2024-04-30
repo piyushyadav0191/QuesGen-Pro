@@ -59,7 +59,7 @@ const page = () => {
   };
 
   return (
-    <div className="container mx-auto antialiased text-gray-900 bg-white">
+    <div className="container mx-auto antialiased text-gray-900 ">
       <main className="mx-4 my-16">
         <div className="text-center">
           <h1 className="mb-4 text-2xl font-normal md:text-3xl lg:text-4xl">
@@ -89,7 +89,7 @@ const page = () => {
               }}
             ></div>
             <div
-              className="absolute inline-flex items-center justify-center w-6 h-6 transition-all duration-200 ease-in-out transform bg-white rounded-full shadow-sm top-1 left-1"
+              className="absolute inline-flex items-center justify-center w-6 h-6 transition-all duration-200 ease-in-out transform  rounded-full shadow-sm top-1 left-1"
               style={{
                 transform:
                   billPlan === "monthly" ? "translateX(0)" : "translateX(36px)",
@@ -102,7 +102,7 @@ const page = () => {
         <div className="flex flex-col items-center justify-center mt-16 space-y-8 lg:flex-row lg:items-stretch lg:space-x-8 lg:space-y-0">
           {plans.map((plan, i) => (
             <section
-              className="flex flex-col w-full max-w-sm p-12 space-y-6 bg-white rounded-lg shadow-md"
+              className="flex flex-col w-full max-w-sm p-12 space-y-6  rounded-lg shadow-md"
               key={i}
             >
               <div className="flex-shrink-0">

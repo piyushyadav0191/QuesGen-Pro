@@ -20,7 +20,7 @@ const Navbar = async () => {
 
   return (
     <>
-      <div className="fixed inset-x-0 top-0  bg-white dark:bg-gray-900   h-16 border-b border-zinc-300 py-2 mb-3">
+      <div className="fixed inset-x-0 top-0  h-16 border-b border-zinc-300 py-2 mb-3">
         {!!session?.user && <Sidebar />}
         <div className=" flex items-center justify-between h-full gap-2 px-8 mx-auto max-w-7xl">
           <div className="flex justify-center">
@@ -33,7 +33,7 @@ const Navbar = async () => {
             <Link href={"/blog"} className="underline">
               Blog
             </Link>
-            <div className="flex items-center bg-white dark:bg-gray-900">
+            <div className="flex items-center ">
               {session?.user ? (
                 <>
                   <span className="mr-4 p-2">

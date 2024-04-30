@@ -37,14 +37,14 @@ const Statistics = ({ game, accuracy }: Props) => {
   return (
     <>
       {hasMounted && (
-        <div className="p-8 mx-auto max-w-7xl bg-white dark:bg-gray-900">
+        <div className="p-8 mx-auto max-w-7xl mt-12 ">
           <div className="flex items-center justify-between space-y-2">
             <h2 className="text-3xl font-bold tracking-tight text-black dark:text-gray-300">
               Statistics
             </h2>
             <div className=" flex items-center space-x-2">
               <Link href={"/dashboard"} className={buttonVariants()}>
-                <LucideLayoutDashboard className="mr-2 text-black dark:text-gray-200" />
+                <LucideLayoutDashboard className="mr-2 " />
                 Back to Dashboard
               </Link>
             </div>

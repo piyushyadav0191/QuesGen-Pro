@@ -43,7 +43,7 @@ const Leaderboard = ({ topUsers }: Props) => {
         {topUsers.map((users, index) => (
           <div
             key={users.userId}
-            className={`bg-white p-4 shadow-md ${getColorClass(index)}`}
+            className={` p-4 shadow-md ${getColorClass(index)}`}
           >
             <div className="flex justify-between">
               <p className="text-black">{users._max.userName}</p>

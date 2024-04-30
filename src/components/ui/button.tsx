@@ -22,7 +22,7 @@ const buttonVariants = cva(
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
         mcqButton:
-          "bg-white text-blue-700 shadow hover:-translate-y-[2px] border-2 border-r-8 border-b-8 border-blue-700 px-2 py-1 font-bold transition-all dark:bg-white",
+          " text-blue-700 shadow hover:-translate-y-[2px] border-2 border-r-8 border-b-8 border-blue-700 px-2 py-1 font-bold transition-all dark:",
       },
       size: {
         default: "h-9 px-4 py-2",

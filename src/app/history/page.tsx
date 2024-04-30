@@ -33,7 +33,7 @@ const page = async (props: Props) => {
             </Link>
           </div>
         </CardHeader>
-        <CardContent className="max-h-[60vh] overflow-scroll  bg-white dark:bg-gray-900">
+        <CardContent className="max-h-[60vh] overflow-scroll  ">
           <History limit={100} userId={session.user.id} />
         </CardContent>
       </Card>

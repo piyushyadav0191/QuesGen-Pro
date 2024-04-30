@@ -8,7 +8,7 @@ const TestiMonial = ({ data }: any) => {
       {data.map((user: any) => (
         <div
           key={user.id}
-          className="bg-white shadow-lg rounded-[7%] overflow-hidden flex flex-col items-center text-center mx-4 my-4 dark:bg-gray-800"
+          className=" shadow-lg rounded-[7%] overflow-hidden flex flex-col items-center text-center mx-4 my-4 dark:bg-gray-800"
           style={{ width: "300px", height: "100%" }}
         >
           <img

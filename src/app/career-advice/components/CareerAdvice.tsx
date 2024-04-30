@@ -115,7 +115,7 @@ const CareerAdvice = (props: Props) => {
                         <SelectValue placeholder="Select your experience" />
                       </SelectTrigger>
                     </FormControl>
-                    <SelectContent className="bg-white dark:bg-gray-900">
+                    <SelectContent className="">
                       <SelectItem value="experienced">experienced</SelectItem>
                       <SelectItem value="fresher">fresher</SelectItem>
                     </SelectContent>

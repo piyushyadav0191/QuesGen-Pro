@@ -52,7 +52,7 @@ const Sidebar = () => {
             animate={{ x: 0 }}
             exit={{ x: -300 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-y-0 z-10 flex w-80 dark:bg-gray-900"
+            className="fixed inset-y-0 z-10 flex w-80 "
             id="sidebar"
           >
             {/* Curvy shape */}
@@ -67,7 +67,7 @@ const Sidebar = () => {
               <path d="M268.487 0H0V800H247.32C207.957 725 207.975 492.294 268.487 367.647C329 243 314.906 53.4314 268.487 0Z" />
             </svg>
             {/* Sidebar content */}
-            <div className="z-10 flex flex-col flex-1 dark:bg-gray-900">
+            <div className="z-10 flex flex-col flex-1 ">
               <div className="flex items-center justify-between flex-shrink-0 w-64 p-4">
                 {/* Logo */}
                 <Link href={"/"} className="px-4 text-2xl font-bold ">

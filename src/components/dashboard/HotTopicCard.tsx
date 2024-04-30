@@ -15,13 +15,13 @@ const HotTopicCard = async (props: Props) => {
   const topics = await prisma.topicCount.findMany({});
   const formattedTopic = topics.map((topic) => {
     return {
-      value: topic.topic,
-      count: topic.count,
+      text: topic.topic,
+      value: topic.count,
     };
   });
 
   return (
-    <Card className="col-span-4 dark:bg-gray-900 ">
+    <Card className="col-span-4  ">
       <CardHeader>
         <CardTitle className="text-2xl font-bold text-black underline hover:no-underline dark:text-gray-200 ">
           Hot Topics

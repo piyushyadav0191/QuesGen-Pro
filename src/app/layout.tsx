@@ -25,12 +25,11 @@ export default function RootLayout({
       <body
         className={cn(
           inter.className,
-          "bg-white dark:bg-gray-900  min-h-screen pt-6"
+          " min-h-screen pt-6"
         )}
       >
         <Providers>
           <Navbar />
-          <FlareCursor />
           {children}
           <Toaster />
         </Providers>

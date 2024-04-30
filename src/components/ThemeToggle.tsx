@@ -18,10 +18,11 @@ export function ModeToggle({
 }: React.HtmlHTMLAttributes<HTMLDivElement>) {
   const { setTheme } = useTheme();
 
+
   return (
     <div className={className} {...props}>
       <DropdownMenu>
-        <DropdownMenuTrigger asChild>
+        <DropdownMenuTrigger asChild className="bg-white hover:bg-gray-300 dark:bg-black dark:text-white">
           <Button size="icon">
             <SunIcon
               className="h-[1.2rem]  w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0"
@@ -31,9 +32,9 @@ export function ModeToggle({
             <span className="sr-only">Toggle theme</span>
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent align="end" className="bg-white dark:bg-gray-900">
+        <DropdownMenuContent align="end" className="">
           <DropdownMenuItem
-            className="text-black dark:text-white hover:text-black "
+            className="text-black dark:text-white hover:bg-gray-600"
             onClick={() => setTheme("light")}
           >
             Light

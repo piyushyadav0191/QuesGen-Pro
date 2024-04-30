@@ -18,7 +18,6 @@ type Props = {
 };
 
 const QuestionsList = ({ questions }: Props) => {
-  console.log(questions);
   let gameType = questions[0].questionType;
   return (
     <Table className="mt-4">

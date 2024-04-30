@@ -17,6 +17,7 @@ import { cn, formatTimeDelta } from "@/lib/utils";
 import Confetti from "react-confetti";
 import { FeedbackSheet } from "./FeedbackSheet";
 
+
 type Props = {
   game: Game & { Question: Pick<Question, "id" | "options" | "question">[] };
 };
@@ -97,26 +98,6 @@ const MCQ = ({ game }: Props) => {
     });
   }, [checkAnswer, toast, isChecking, questionIndex, game.Question.length]);
 
-  useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "1") {
-        setSelectedChoice(0);
-      } else if (event.key === "2") {
-        setSelectedChoice(1);
-      } else if (event.key === "3") {
-        setSelectedChoice(2);
-      } else if (event.key === "4") {
-        setSelectedChoice(3);
-      } else if (event.key === "Enter") {
-        handleNext();
-      }
-    };
-    document.addEventListener("keydown", handleKeyDown);
-    return () => {
-      document.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [handleNext]);
-
   if (hasEnded) {
     return (
       <>
@@ -181,10 +162,10 @@ const MCQ = ({ game }: Props) => {
             <Button
               key={index}
               className={cn(
-                "justify-start w-full py-8 mb-4 dark:hover:bg-slate-800 hover:bg-gray-400",
+                "justify-start w-full py-8 mb-4 dark:hover:bg-gray-800 hover:bg-gray-400",
                 `${
                   selectedChoice === index
-                    ? "dark:bg-white bg-black text-white dark:text-black"
+                    ? " text-white dark:text-black dark:bg-white "
                     : ""
                 }`
               )}

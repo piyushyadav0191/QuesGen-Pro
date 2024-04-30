@@ -29,7 +29,7 @@ const QuizMeCard = (props: Props) => {
         className="hover:cursor-pointer hover:opacity-75"
         onClick={() => router.push("/mcq")}
       >
-        <CardHeader className="flex flex-row items-center dark:bg-gray-900  justify-between pb-2 space-y-0">
+        <CardHeader className="flex flex-row items-center   justify-between pb-2 space-y-0">
           <CardTitle className="text-2xl font-bold text-black dark:text-gray-200 underline hover:no-underline">
             MCQ / Open Ended!
           </CardTitle>

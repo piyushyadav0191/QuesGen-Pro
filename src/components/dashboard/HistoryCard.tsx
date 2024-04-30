@@ -28,7 +28,7 @@ const HistoryCard = (props: Props) => {
         className="hover:cursor-pointer hover:opacity-75"
         onClick={() => router.push("/history")}
       >
-        <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0 dark:bg-gray-900 ">
+        <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0  ">
           <CardTitle className="text-2xl font-bold text-black underline hover:no-underline dark:text-gray-200 ">
             History!
           </CardTitle>

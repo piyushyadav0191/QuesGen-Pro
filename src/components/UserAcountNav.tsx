@@ -45,7 +45,7 @@ const UserAcountNav = ({ user, userRole }: Props) => {
           </DropdownMenuTrigger>
         </AnimatePresence>
       </motion.div>
-      <DropdownMenuContent align="end" className="bg-white dark:bg-gray-900">
+      <DropdownMenuContent align="end" className="">
         <div className="flex items-center justify-start gap-2 p-2">
           <div className="flex flex-col space-y-1 leading-none">
             {user.name && (

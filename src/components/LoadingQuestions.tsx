@@ -54,7 +54,7 @@ const LoadingQuestions = ({ finished }: Props) => {
       />
       <Progress
         value={progress}
-        className="w-full mt-4 bg-blue-600 dark:bg-white"
+        className="w-full mt-4 bg-blue-600 dark:"
       />
       <h1 className="mt-2 text-xl">{loadingText} </h1>
     </div>

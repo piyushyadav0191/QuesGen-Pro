@@ -91,12 +91,8 @@ const McqCreation = ({ topicParam }: Props) => {
 
   form.watch();
 
-  // if (showLoader && isLoading) {
-  //   return <LoadingQuestions finished={finished} />;
-  // }
-
   return (
-    <div className="absolute top-[170px] left-[650px] bg-white">
+    <div className="absolute top-[170px] left-[650px] ">
       <Card>
         <CardHeader>
           <CardTitle className="text-2xl font-bold text-black dark:text-gray-300 ">
@@ -106,7 +102,7 @@ const McqCreation = ({ topicParam }: Props) => {
             Choose a Topic
           </CardDescription>
         </CardHeader>
-        <CardContent className="dark:bg-gray-900 ">
+        <CardContent className=" ">
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
               <FormField
@@ -162,7 +158,7 @@ const McqCreation = ({ topicParam }: Props) => {
               <div className="flex justify-between">
                 <Button
                   type="button"
-                  className="text-black"
+                  className=""
                   variant={
                     form.getValues("type") === "mcq" ? "mcqButton" : "outline"
                   }
@@ -175,7 +171,7 @@ const McqCreation = ({ topicParam }: Props) => {
                 </Button>
                 <Separator orientation="vertical" />
                 <Button
-                  className="text-black"
+                  className=""
                   type="button"
                   variant={
                     form.getValues("type") === "open_ended"

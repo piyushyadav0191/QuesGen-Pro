@@ -28,7 +28,7 @@ const Profile = ({ user }: Props) => {
   };
 
   return (
-    <div className="bg-gray-100 h-[90vh] p-6 rounded-lg shadow-md flex dark:bg-gray-900">
+    <div className="h-[90vh] p-6 rounded-lg shadow-md flex max-w-7xl mx-auto ">
       {/* First Column */}
       <div className="flex-shrink-0 w-1/3 ml-8">
         <img

@@ -14,7 +14,6 @@ export const revalidate = 60; // 60 sec
 
 export default async function Page() {
   const data = (await getData()) as Post[];
-  console.log(data);
 
   return (
     <>
