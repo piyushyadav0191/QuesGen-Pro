@@ -20,8 +20,8 @@ const Navbar = async () => {
 
   return (
     <>
-      <div className="fixed inset-x-0 top-0  h-16 border-b border-zinc-300 py-2 mb-3">
         {!!session?.user && <Sidebar />}
+      <div className="sticky inset-x-0 top-0  h-16 border-b border-zinc-300 py-2 mb-3">
         <div className=" flex items-center justify-between h-full gap-2 px-8 mx-auto max-w-7xl">
           <div className="flex justify-center">
             <Logo />

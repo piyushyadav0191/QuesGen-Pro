@@ -3,6 +3,17 @@ import { prisma } from "@/lib/db";
 import { getAuthSession } from "@/lib/nextauth";
 import { careerAdviceSchema } from "@/schemas/form/mcq";
 import { NextResponse } from "next/server";
+import OpenAI from 'openai';
+import { OpenAIStream, StreamingTextResponse } from 'ai';
+import { ChatCompletionMessageParam } from "openai/resources/index.mjs";
+
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+});
+
+export const dynamic = 'force-dynamic';
+
+
 
 export const POST = async (req: Request, res: Response) => {
   try {
@@ -27,41 +38,39 @@ export const POST = async (req: Request, res: Response) => {
     const body = await req.json();
     const { topic, experienced } = careerAdviceSchema.parse(body);
 
-    // Assuming strict_output returns an array of JSON objects
-    const questions = await strict_output(
-      `You are a helpful AI that is able to generate career advice as the answer to that question and do not answer anything other than career advice, store the answer and question in a JSON array. You are to generate an answer about ${topic} for ${experienced}`,
-      [],
-      {
-        question: "question",
-        answer: "answer",
-      }
-    );
-
-    // Return the questions array as JSON
-    const responseBody = {
-      questions: questions,
-    };
-
-    await prisma.careerAdvice.create({
-      // @ts-ignore
-      data: {
-        createdAt: new Date(),
-        careerAdvice: JSON.stringify(responseBody.questions),
-        userId: session?.user?.id,
-      },
+    const response = await openai.chat.completions.create({
+      model: 'gpt-3.5-turbo',
+      stream: true,
+      messages: [
+        {
+          role: 'system',
+          content: `You are a helpful AI that is able to generate career advice as the answer to that question and do not answer anything other than career advice, store the answer and question in a JSON array. You are to generate an answer about ${topic} for ${experienced}`,
+        },
+      ],
     });
-    await prisma.user.update({
-      where: {
-        id: session?.user?.id,
-      },
-      data: {
-        hasGeneratedAdvice: true,
-      },
-    });
+    const stream = OpenAIStream(response);
+    // Respond with the stream
+    return new StreamingTextResponse(stream);
 
-    return NextResponse.json(responseBody, {
-      status: 200,
-    });
+    // await prisma.careerAdvice.create({
+    //   data: {
+    //     createdAt: new Date(),
+    //     careerAdvice: JSON.stringify(responseBody.questions),
+    //     userId: session?.user?.id as string,
+    //   },
+    // });
+    // await prisma.user.update({
+    //   where: {
+    //     id: session?.user?.id,
+    //   },
+    //   data: {
+    //     hasGeneratedAdvice: true,
+    //   },
+    // });
+
+    // return NextResponse.json("responseBody", {
+    //   status: 200,
+    // });
   } catch (error) {
     console.error("elle gpt error", error);
     return NextResponse.json(

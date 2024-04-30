@@ -92,7 +92,7 @@ const McqCreation = ({ topicParam }: Props) => {
   form.watch();
 
   return (
-    <div className="absolute top-[170px] left-[650px] ">
+    <div className="flex h-screen justify-center items-center">
       <Card>
         <CardHeader>
           <CardTitle className="text-2xl font-bold text-black dark:text-gray-300 ">

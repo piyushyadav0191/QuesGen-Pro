@@ -21,16 +21,16 @@ type Props = {
 };
 
 const Profile = ({ user }: Props) => {
-  const [activeTab, setActiveTab] = useState("about"); // Default to "about" tab
+  const [activeTab, setActiveTab] = useState("about"); 
 
   const handleTabChange = (tab: any) => {
     setActiveTab(tab);
   };
 
   return (
-    <div className="h-[90vh] p-6 rounded-lg shadow-md flex max-w-7xl mx-auto ">
+<div className="h-[90vh] p-6 rounded-lg shadow-md max-w-7xl mx-auto sm:flex sm:flex-row">
       {/* First Column */}
-      <div className="flex-shrink-0 w-1/3 ml-8">
+      <div className="sm:w-1/3 sm:mr-6 mb-6 sm:mb-0">
         <img
           src={user.image}
           alt={user.name}
@@ -39,7 +39,7 @@ const Profile = ({ user }: Props) => {
       </div>
 
       {/* Second Column */}
-      <div className="ml-6 flex-grow">
+      <div className="flex-grow mt-32">
         <h1 className="text-3xl font-semibold mb-4 dark:text-gray-200">
           {user.name}'s Profile
         </h1>
@@ -49,9 +49,9 @@ const Profile = ({ user }: Props) => {
           <button
             className={`${
               activeTab === "about"
-                ? "bg-purple-500 hover:bg-purple-600 text-white"
+                ? "bg-blue-500 hover:bg-blue-600 text-white"
                 : "bg-gray-300 hover:bg-gray-400 text-gray-700"
-            } px-4 py-2 mr-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500`}
+            } px-4 py-2 mr-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500`}
             onClick={() => handleTabChange("about")}
           >
             About

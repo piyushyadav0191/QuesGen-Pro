@@ -17,7 +17,7 @@ const page = async (props: Props) => {
     return redirect("/");
   }
   return (
-    <div className="absolute  top-[20%] left-1/3 ">
+    <div className="flex h-screen justify-center items-center">
       <Card>
         <CardHeader>
           <div className="flex items-center justify-between ">

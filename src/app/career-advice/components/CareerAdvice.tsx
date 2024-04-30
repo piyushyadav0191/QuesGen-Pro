@@ -29,12 +29,16 @@ import axios from "axios";
 import { toast } from "sonner";
 import { Router } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { useChat } from 'ai/react';
+import { set } from "date-fns";
+
 
 type Props = {};
 type Input = z.infer<typeof careerAdviceSchema>;
 
 const CareerAdvice = (props: Props) => {
-  const router = useRouter();
+
+  const [advices, setAdvices] = useState([]);  
 
   const form = useForm<z.infer<typeof careerAdviceSchema>>({
     resolver: zodResolver(careerAdviceSchema),
@@ -44,7 +48,7 @@ const CareerAdvice = (props: Props) => {
     },
   });
 
-  const { mutate: getAdvice, isLoading } = useMutation({
+  const { mutate: getAdvice, isLoading,  } = useMutation({
     mutationFn: async ({ topic, experienced }: Input) => {
       const response = await axios.post("/api/learning", {
         topic,
@@ -60,14 +64,16 @@ const CareerAdvice = (props: Props) => {
         experienced: input.experienced,
       },
       {
-        onSuccess: () => {
-          router.push("/ai-answer");
+        onSuccess: (data) => {
+          // setAdvices(data)
+          // console.log(data)
+          // router.push("/ai-answer");
         },
         onError: (error) => {
           // @ts-ignore
-          if (error?.response?.data?.error) {
-            router.push("/pricing");
-          }
+          // if (error?.response?.data?.error) {
+          //   router.push("/pricing");
+          // }
           toast.error("Error getting advice");
         },
       }
@@ -77,10 +83,10 @@ const CareerAdvice = (props: Props) => {
   if (isLoading) {
     return <div>Loading...</div>;
   }
-  form.watch();
 
   return (
     <>
+
       <div className="min-h-screen flex items-center justify-center">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
