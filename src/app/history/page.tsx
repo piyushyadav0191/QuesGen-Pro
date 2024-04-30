@@ -26,7 +26,7 @@ const page = async (props: Props) => {
             </CardTitle>
             <Link
               href={"/dashboard"}
-              className={cn(buttonVariants(), "text-black dark:text-gray-200")}
+              className={cn(buttonVariants(), "")}
             >
               <LucideLayoutDashboard className="mr-2" />
               Back to Dashboard
