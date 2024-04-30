@@ -1,37 +1,16 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-const AiAnswer = () => {
-  const [answer, setAnswer] = useState([]);
+import Markdown from "react-markdown";
 
-  useEffect(() => {
-    const fetchanswer = async () => {
-      const res = await fetch("/api/learning");
-      const data = await res.json();
-      setAnswer(JSON.parse(data[0].careerAdvice));
-    };
-    fetchanswer();
-  }, []);
-
+const AiAnswer = ({ careerAdvice }: any) => {
   return (
-    <div className="mt-20">
+    <div className="mt-20 max-w-7xl mx-auto">
       <div>
-        <div>
-          <div className="text-2xl font-bold text-center">
-            {answer.map((item: any) => (
-              <Card className="w-[1500px] mb-4" key={item.question}>
-                <CardHeader>
-                  <CardTitle>Career Advice</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="code">
-                    <pre>{item.answer}</pre>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+        <div className="">
+          {careerAdvice.map((advice: any) => {
+            const content = JSON.parse(advice.careerAdvice);
+            return <Markdown>{content.content}</Markdown>;
+          })}
         </div>
       </div>
     </div>

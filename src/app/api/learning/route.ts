@@ -40,7 +40,6 @@ export const POST = async (req: Request, res: Response) => {
 
     const response = await openai.chat.completions.create({
       model: 'gpt-3.5-turbo',
-      stream: true,
       messages: [
         {
           role: 'system',
@@ -48,29 +47,28 @@ export const POST = async (req: Request, res: Response) => {
         },
       ],
     });
-    const stream = OpenAIStream(response);
-    // Respond with the stream
-    return new StreamingTextResponse(stream);
+    
+    await prisma.careerAdvice.create({
+      data: {
+        name: session?.user?.name as string,
+        createdAt: new Date(),
+        careerAdvice: JSON.stringify(response.choices[0].message),
+        userId: session?.user?.id as string,
+      },
+    })
 
-    // await prisma.careerAdvice.create({
-    //   data: {
-    //     createdAt: new Date(),
-    //     careerAdvice: JSON.stringify(responseBody.questions),
-    //     userId: session?.user?.id as string,
-    //   },
-    // });
-    // await prisma.user.update({
-    //   where: {
-    //     id: session?.user?.id,
-    //   },
-    //   data: {
-    //     hasGeneratedAdvice: true,
-    //   },
-    // });
+    await prisma.user.update({
+      where: {
+        id: session?.user?.id,
+      },
+      data: {
+        hasGeneratedAdvice: true,
+      },
+    });
 
-    // return NextResponse.json("responseBody", {
-    //   status: 200,
-    // });
+    return NextResponse.json("success", {
+      status: 200,
+    });
   } catch (error) {
     console.error("elle gpt error", error);
     return NextResponse.json(

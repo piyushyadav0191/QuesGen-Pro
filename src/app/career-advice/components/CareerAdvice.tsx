@@ -1,4 +1,5 @@
 "use client";
+
 import {
   Form,
   FormControl,
@@ -8,7 +9,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -18,27 +18,21 @@ import { Button } from "@/components/ui/button";
 import {
   Select,
   SelectContent,
-  SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { toast } from "sonner";
-import { Router } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useChat } from 'ai/react';
-import { set } from "date-fns";
 
 
-type Props = {};
 type Input = z.infer<typeof careerAdviceSchema>;
 
-const CareerAdvice = (props: Props) => {
+const CareerAdvice = () => {
 
-  const [advices, setAdvices] = useState([]);  
+  const router = useRouter();
 
   const form = useForm<z.infer<typeof careerAdviceSchema>>({
     resolver: zodResolver(careerAdviceSchema),
@@ -64,17 +58,12 @@ const CareerAdvice = (props: Props) => {
         experienced: input.experienced,
       },
       {
-        onSuccess: (data) => {
-          // setAdvices(data)
-          // console.log(data)
-          // router.push("/ai-answer");
+        onSuccess: () => {
+          router.push("/ai-answer");
         },
-        onError: (error) => {
-          // @ts-ignore
-          // if (error?.response?.data?.error) {
-          //   router.push("/pricing");
-          // }
+        onError: () => {
           toast.error("Error getting advice");
+          router.push("/pricing")
         },
       }
     );
