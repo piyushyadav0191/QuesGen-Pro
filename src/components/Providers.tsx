@@ -7,6 +7,8 @@ import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { jokes } from "@/lib/jokes";
+import { AppProgressBar as ProgressBar } from 'next-nprogress-bar';
+
 
 const getRandomJoke = () => {
   const randomIndex = Math.floor(Math.random() * jokes.length);
@@ -43,7 +45,15 @@ const Providers = ({ children, ...props }: ThemeProviderProps) => {
         enableSystem
         {...props}
       >
-        <SessionProvider>{children}</SessionProvider>
+        <SessionProvider>{children}
+        <ProgressBar
+        height="6px"
+        color="#5BBCFF"
+        options={{ showSpinner: false }}
+        shallowRouting
+      />
+        
+        </SessionProvider>
       </NextThemesProvider>
     </QueryClientProvider>
   );

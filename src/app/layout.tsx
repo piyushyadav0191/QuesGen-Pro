@@ -4,7 +4,6 @@ import { Poppins } from "next/font/google";
 import { cn } from "@/lib/utils";
 import Navbar from "@/components/Navbar";
 import Providers from "@/components/Providers";
-import FlareCursor from "@/components/Flarecursor";
 import { Toaster} from 'sonner'
 
 const inter = Poppins({ subsets: ["latin"], weight: "500" });
