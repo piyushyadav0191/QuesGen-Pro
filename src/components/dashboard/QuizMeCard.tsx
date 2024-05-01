@@ -31,7 +31,7 @@ const QuizMeCard = (props: Props) => {
       >
         <CardHeader className="flex flex-row items-center   justify-between pb-2 space-y-0">
           <CardTitle className="text-2xl font-bold text-black dark:text-gray-200 underline hover:no-underline">
-            MCQ / Open Ended!
+            MCQ / Open Ended
           </CardTitle>
           <Atom size={"28"} strokeWidth={2.5} className="text-blue-700" />
         </CardHeader>

@@ -77,7 +77,7 @@ const Profile = ({ user }: Props) => {
         )}
 
         {activeTab === "questions" && (
-          <div style={{ maxHeight: "70vh", overflowY: "scroll" }}>
+          <div style={{ maxHeight: "60vh", overflowY: "scroll" }}>
             <h2 className="text-2xl font-semibold mt-4 mb-4 dark:text-gray-200">
               Past Games Played
             </h2>
@@ -88,7 +88,7 @@ const Profile = ({ user }: Props) => {
                   className="mb-8 border-b border-gray-300 pb-6"
                 >
                   <div className="mb-4">
-                    <p className="text-xl font-semibold dark:text-gray-200">
+                    <p className="text-xl font-semibold ">
                       Topic: {game.topic}
                     </p>
                     <p className="text-gray-600 underline font-semibold">

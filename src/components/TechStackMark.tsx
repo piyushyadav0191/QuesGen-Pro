@@ -8,8 +8,6 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 
-type Props = {};
-
 const cardData = [
   {
     iconSrc: "/icons/next.svg",
@@ -73,7 +71,7 @@ const cardData = [
   },
 ];
 
-const TechStackMark = (props: Props) => {
+const TechStackMark = () => {
   return (
     <div>
       <Dialog>
@@ -110,7 +108,7 @@ const TechStackMark = (props: Props) => {
                           className="w-16 h-16 mx-auto"
                         />
                       </div>
-                      <div className="text-center dark:text-black">
+                      <div className="text-center">
                         {card.title}
                       </div>
                     </div>
