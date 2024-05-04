@@ -179,9 +179,11 @@ const McqCreation = ({ topicParam }: Props) => {
                 </FormControl>
                 <SelectContent>
                   <SelectItem value="easy">easy</SelectItem>
-                  <SelectItem value="medium">medium</SelectItem>
                 </SelectContent>
               </Select>
+              <FormDescription className="text-black dark:text-gray-500">
+                     For now, we have only easy level
+                    </FormDescription>
               <FormMessage />
             </FormItem>
           )}
