@@ -38,20 +38,20 @@ model Session {
 }
 
 model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String?   @unique
-  emailVerified DateTime?
-  image         String?
-  role          UserRole?
-  accounts      Account[]
-  sessions      Session[]
-  game          Game[]
-  accuracy     AccuracyRecord[]
-  rating        Rating[]
-  feedback      Feedback[]
-    hasGeneratedAdvice Boolean @default(false)
-  careerAdvice  CareerAdvice[]
+  id                 String           @id @default(cuid())
+  name               String?
+  email              String?          @unique
+  emailVerified      DateTime?
+  image              String?
+  role               UserRole?
+  accounts           Account[]
+  sessions           Session[]
+  game               Game[]
+  accuracy           AccuracyRecord[]
+  rating             Rating[]
+  feedback           Feedback[]
+  hasGeneratedAdvice Boolean          @default(false)
+  careerAdvice       CareerAdvice[]
 }
 
 enum UserRole {
@@ -72,6 +72,11 @@ enum GameType {
   open_ended
 }
 
+enum Level {
+  easy
+  medium
+}
+
 model Game {
   id          String     @id @default(cuid())
   userId      String
@@ -82,13 +87,15 @@ model Game {
   user        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
   Question    Question[]
   rating      Rating[]
+  level       Level      @default(easy)
 
   @@index([userId], name: "userId")
 }
+
 model TopicCount {
-  id         String     @id @default(cuid())
-  topic      String      @unique
-  count      Int
+  id    String @id @default(cuid())
+  topic String @unique
+  count Int
 }
 
 model Question {
@@ -109,47 +116,47 @@ model Question {
 
 model AccuracyRecord {
   id        Int      @id @default(autoincrement())
-  userId      String
+  userId    String
   userName  String
   accuracy  Float
   createdAt DateTime @default(now())
-  user        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
-   @@index([userId], name: "accuracyId")
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId], name: "accuracyId")
 }
 
-
 model Rating {
-  id         String  @id @default(cuid())
-  userId     String
-  gameId     String
-  rating     Int     // This field stores the rating value (1 to 5 stars)
-  createdAt  DateTime @default(now())
+  id        String   @id @default(cuid())
+  userId    String
+  gameId    String
+  rating    Int // This field stores the rating value (1 to 5 stars)
+  createdAt DateTime @default(now())
 
-  user       User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-  game       Game    @relation(fields: [gameId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  game Game @relation(fields: [gameId], references: [id], onDelete: Cascade)
 
   @@index([userId], name: "usersid")
   @@index([gameId], name: "gamerid")
 }
 
 model Feedback {
-  id         String  @id @default(cuid())
-  userId     String
-  name        String?
-  feedback   String?
-  createdAt  DateTime @default(now())
-  user       User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id        String   @id @default(cuid())
+  userId    String
+  name      String?
+  feedback  String?
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId], name: "feedbackid")
 }
 
 model CareerAdvice {
-  id         String  @id @default(cuid())
-  userId     String
-  name        String?
-  careerAdvice   Json?
-  createdAt  DateTime @default(now())
-  user       User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id           String   @id @default(cuid())
+  userId       String
+  name         String?
+  careerAdvice Json?
+  createdAt    DateTime @default(now())
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId], name: "careeradviceid")
-  }
+}

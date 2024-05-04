@@ -9,13 +9,14 @@ export const POST = async (req: Request, res: Response) => {
   try {
     const session = await getAuthSession();
     const body = await req.json();
-    const { amount, topic, type } = mcqCreationSchema.parse(body);
+    const { amount, topic, type, level} = mcqCreationSchema.parse(body);
     const game = await prisma.game.create({
       data: {
         gameType: type,
         timeStarted: new Date(),
         userId: session?.user.id as string,
         topic,
+        level: level,
         timeEnded: new Date(),
       },
     });
@@ -37,6 +38,7 @@ export const POST = async (req: Request, res: Response) => {
       amount,
       topic,
       type,
+      level
     });
 
     if (type === "mcq") {

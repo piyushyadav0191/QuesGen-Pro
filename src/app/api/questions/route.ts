@@ -8,13 +8,13 @@ export const runtime = 'edge';
 export const POST = async (req: Request) => {
   try {
     const body = await req.json();
-    const { amount, topic, type } = mcqCreationSchema.parse(body);
+    const { amount, topic, type,level } = mcqCreationSchema.parse(body);
     let questions: any;
     if (type === "open_ended") {
       questions = await strict_output(
-        "You are a QuesGen Pro AI that is able to generate a number of question and answers, the length of each answer should not be more than 15 words, store all the pairs of answers and questions in a JSON array",
+        "You are a QuesGen Pro AI that is able to generate a  number of question and answers, the length of each answer should not be more than 15 words, store all the pairs of answers and questions in a JSON array",
         new Array(amount).fill(
-          `You are to generate a random open-ended questions about ${topic}`
+          `You are to generate a ${level} open-ended questions about ${topic}`
         ),
         {
           question: "question",
@@ -25,7 +25,7 @@ export const POST = async (req: Request) => {
       questions = await strict_output(
         "You are a QuesGen Pro AI that is able to generate mcq questions and answers, the length of each answer should not be more than 15 words, store all answers and questions and options in a JSON array",
         new Array(amount).fill(
-          `You are to generate a random mcq question about ${topic}`
+          `You are to generate a ${level} mcq question about ${topic}`
         ),
         {
           question: "question",

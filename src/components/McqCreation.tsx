@@ -22,6 +22,13 @@ import {
   FormLabel,
   FormMessage,
 } from "./ui/form";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "./ui/select"
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { BookIcon, CopyCheck } from "lucide-react";
@@ -42,11 +49,12 @@ const McqCreation = ({ topicParam }: Props) => {
 
   const router = useRouter();
   const { mutate: getQuestions } = useMutation({
-    mutationFn: async ({ amount, topic, type }: Input) => {
+    mutationFn: async ({ amount, topic, type,level }: Input) => {
       const response = await axios.post("/api/game", {
         amount,
         topic,
         type,
+        level
       });
       return response.data;
     },
@@ -58,6 +66,7 @@ const McqCreation = ({ topicParam }: Props) => {
       amount: 3,
       topic: topicParam || "",
       type: "open_ended",
+      level: "easy",
     },
   });
 
@@ -68,6 +77,7 @@ const McqCreation = ({ topicParam }: Props) => {
         amount: input.amount,
         topic: input.topic,
         type: input.type,
+        level: input.level
       },
       {
         onSuccess: ({ gameId }) => {
@@ -155,6 +165,27 @@ const McqCreation = ({ topicParam }: Props) => {
                   </FormItem>
                 )}
               />
+               <FormField
+          control={form.control}
+          name="level"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Difficulty level</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select Difficulty Level" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  <SelectItem value="easy">easy</SelectItem>
+                  <SelectItem value="medium">medium</SelectItem>
+                </SelectContent>
+              </Select>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
               <div className="flex justify-between">
                 <Button
                   type="button"
