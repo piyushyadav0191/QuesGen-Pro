@@ -39,7 +39,7 @@ import { useRouter } from "next/navigation";
 
 import { toast } from "sonner";
 
-type Input = z.infer<typeof mcqCreationSchema>;
+type InputType = z.infer<typeof mcqCreationSchema>;
 
 type Props = {
   topicParam: string;
@@ -49,7 +49,7 @@ const McqCreation = ({ topicParam }: Props) => {
 
   const router = useRouter();
   const { mutate: getQuestions } = useMutation({
-    mutationFn: async ({ amount, topic, type,level }: Input) => {
+    mutationFn: async ({ amount, topic, type,level }: InputType) => {
       const response = await axios.post("/api/game", {
         amount,
         topic,
@@ -60,7 +60,7 @@ const McqCreation = ({ topicParam }: Props) => {
     },
   });
 
-  const form = useForm<Input>({
+  const form = useForm<InputType>({
     resolver: zodResolver(mcqCreationSchema),
     defaultValues: {
       amount: 3,
@@ -70,7 +70,7 @@ const McqCreation = ({ topicParam }: Props) => {
     },
   });
 
-  const onSubmit = (input: Input) => {
+  const onSubmit = (input: InputType) => {
    const loading =  toast.loading("Please wait...");
     getQuestions(
       {
@@ -154,7 +154,7 @@ const McqCreation = ({ topicParam }: Props) => {
                         placeholder="Enter a amount...."
                         {...field}
                         onChange={(e) => {
-                          form.setValue("amount", parseInt(e.target.value));
+                          form.setValue("amount", Number.parseInt(e.target.value));
                         }}
                       />
                     </FormControl>
@@ -179,6 +179,8 @@ const McqCreation = ({ topicParam }: Props) => {
                 </FormControl>
                 <SelectContent>
                   <SelectItem value="easy">easy</SelectItem>
+                  <SelectItem value="medium">medium</SelectItem>
+                  <SelectItem value="hard">hard</SelectItem>
                 </SelectContent>
               </Select>
               <FormDescription className="text-black dark:text-gray-500">
