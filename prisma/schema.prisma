@@ -75,6 +75,7 @@ enum GameType {
 enum Level {
   easy
   medium
+  hard
 }
 
 model Game {
