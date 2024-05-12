@@ -6,7 +6,7 @@ export const mcqCreationSchema = z.object({
     .min(4, { message: "Topic must be at least 4 characters long" })
     .max(50),
   type: z.enum(["mcq", "open_ended"]),
-  level: z.enum(["easy", "less easy", "medium"]),
+  level: z.enum(["easy", "hard", "medium"]),
   amount: z.number().min(1).max(10),
 });
 
