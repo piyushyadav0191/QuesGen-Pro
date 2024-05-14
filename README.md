@@ -41,4 +41,4 @@ The project is built using the following technologies:
 
 ## Contribution
 
-Contributors are most welcome. Feel free to tweek this project according to project aim
+Contributors are most welcome. Feel free to tweek this project according to project aim and Scope
