@@ -3,13 +3,16 @@ import { mcqCreationSchema } from "@/schemas/form/mcq";
 import { NextResponse } from "next/server";
 import { ZodError } from "zod";
 
+export const runtime = 'edge';
+
 export const POST = async (req: Request) => {
   try {
     const body = await req.json();
     const { amount, topic, type,level } = mcqCreationSchema.parse(body);
     let questions: any;
     if (type === "open_ended") {
-      questions = await  chatSession.sendMessage(`You are a helpful AI that is able to generate a ${amount} ${level} ${type}  question and answers about ${topic}, the length of each answer should not be more than 15 words, Question with answered in Json format, Give question and answered as field in JSON and don't use curly braces at start and end of the JSON.`)
+      questions = await  chatSession.sendMessage(`You are a helpful AI. Generate a JSON with ${amount} ${level} ${type} questions and answers about ${topic}. Each answer should be no longer than 15 words. Do not include curly braces at the start and end of the JSON.
+`)
 
       const result = (questions.response.text().replace('```json', '').replace('```', '' )).trim();
     // Wrap the result in square brackets to form a valid JSON array
