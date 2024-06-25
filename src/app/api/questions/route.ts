@@ -1,9 +1,7 @@
-import { strict_output } from "@/lib/chatgpt";
+import { chatSession } from "@/lib/AI";
 import { mcqCreationSchema } from "@/schemas/form/mcq";
 import { NextResponse } from "next/server";
 import { ZodError } from "zod";
-
-export const runtime = 'edge';
 
 export const POST = async (req: Request) => {
   try {
@@ -11,35 +9,35 @@ export const POST = async (req: Request) => {
     const { amount, topic, type,level } = mcqCreationSchema.parse(body);
     let questions: any;
     if (type === "open_ended") {
-      questions = await strict_output(
-        "You are a QuesGen Pro AI that is able to generate a  number of question and answers, the length of each answer should not be more than 15 words, store all the pairs of answers and questions in a JSON array",
-        new Array(amount).fill(
-          `You are to generate a ${level} open-ended questions about ${topic}`
-        ),
-        {
-          question: "question",
-          answer: "answer with max length of 15 words",
-        }
-      );
-    } else if (type === "mcq") {
-      questions = await strict_output(
-        "You are a QuesGen Pro AI that is able to generate mcq questions and answers, the length of each answer should not be more than 15 words, store all answers and questions and options in a JSON array",
-        new Array(amount).fill(
-          `You are to generate a ${level} mcq question about ${topic}`
-        ),
-        {
-          question: "question",
-          answer: "answer with max length of 15 words",
-          option1: "option1 with max length of 15 words",
-          option2: "option2 with max length of 15 words",
-          option3: "option3 with max length of 15 words",
-        }
-      );
-    }
+      questions = await  chatSession.sendMessage(`You are a helpful AI that is able to generate a ${amount} ${level} ${type}  question and answers about ${topic}, the length of each answer should not be more than 15 words, Question with answered in Json format, Give question and answered as field in JSON`)
 
+    } else if (type === "mcq") {
+      questions = await chatSession.sendMessage(
+        `You are a helpful AI that is able to generate a ${amount} ${level} ${type} question and answers about ${topic}, the length of each answer should not be more than 15 words and options should be numbered like option1: "option1 with max length of 15 words", option2: "option2 with max length of 15 words", etc and should not be more than 4, Question with answered in Json format, Give question and answered as field in JSON. 
+    
+        The format should be as follows:
+        
+            "question": "question",
+            "answer": "answer with max length of 15 words",
+            "option1": "option1 with max length of 15 words",
+            "option2": "option2 with max length of 15 words",
+            "option3": "option3 with max length of 15 words",
+            "option4": "option4 with max length of 15 words"
+        `
+    );
+    
+     
+    }
+    const result = (questions.response.text().replace('```json', '').replace('```', '' )).trim();
+    // Wrap the result in square brackets to form a valid JSON array
+    const validJsonString = `[${result}]`;
+    console.log("string result from questions api", validJsonString);
+    
+      const JsonResponse = JSON.parse(validJsonString);
+      console.log("jsonresponse from questions api", JsonResponse);
     return NextResponse.json(
       {
-        questions,
+        questions: JsonResponse,
       },
       {
         status: 200,
@@ -54,7 +52,7 @@ export const POST = async (req: Request) => {
         }
       );
     } else {
-      console.error("elle gpt error", error);
+      console.error("error", error);
       return NextResponse.json(
         { error: error },
         {

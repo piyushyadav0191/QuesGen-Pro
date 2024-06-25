@@ -10,6 +10,7 @@ export const POST = async (req: Request, res: Response) => {
     const session = await getAuthSession();
     const body = await req.json();
     const { amount, topic, type, level} = mcqCreationSchema.parse(body);
+
     const game = await prisma.game.create({
       data: {
         gameType: type,
@@ -20,6 +21,7 @@ export const POST = async (req: Request, res: Response) => {
         timeEnded: new Date(),
       },
     });
+    console.log("game from game api", game);
     await prisma.topicCount.upsert({
       where: {
         topic,
@@ -40,6 +42,8 @@ export const POST = async (req: Request, res: Response) => {
       type,
       level
     });
+
+    console.log(data)
 
     if (type === "mcq") {
       type mcqQuestion = {
@@ -74,7 +78,7 @@ export const POST = async (req: Request, res: Response) => {
         answer: string;
       };
       await prisma.question.createMany({
-        data: data.questions.map((question: openQuestions) => {
+        data: data.JsonResponse.questions.map((question: openQuestions) => {
           return {
             question: question.question,
             answer: question.answer,
@@ -91,6 +95,7 @@ export const POST = async (req: Request, res: Response) => {
       { status: 200 }
     );
   } catch (error) {
+
     if (error instanceof ZodError) {
       return NextResponse.json(
         { error: error },
