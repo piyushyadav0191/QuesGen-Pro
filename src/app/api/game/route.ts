@@ -43,7 +43,7 @@ export const POST = async (req: Request, res: Response) => {
       level
     });
 
-    console.log(data)
+    console.log("from game api",data )
 
     if (type === "mcq") {
       type mcqQuestion = {
@@ -78,7 +78,7 @@ export const POST = async (req: Request, res: Response) => {
         answer: string;
       };
       await prisma.question.createMany({
-        data: data.JsonResponse.questions.map((question: openQuestions) => {
+        data: data.questions.map((question: openQuestions) => {
           return {
             question: question.question,
             answer: question.answer,
